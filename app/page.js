@@ -345,9 +345,9 @@ export default function Home() {
 
                 <rect x="42" y="302" width="156" height="90" rx="20" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1"/>
                 <text x="56" y="332" fontSize="13" fill="#64748b" textAnchor="start">Monthly EMI</text>
-                <text x="184" y="332" fontSize="15" fontWeight="700" fill="#1d4ed8" textAnchor="end">{'\u20B9'}8,500</text>
+                <text x="184" y="332" fontSize="15" fontWeight="700" fill="#1d4ed8" textAnchor="end">{'\u20B9'}7,920</text>
                 <text x="56" y="354" fontSize="13" fill="#64748b" textAnchor="start">Interest Rate</text>
-                <text x="184" y="354" fontSize="15" fontWeight="700" fill="#1d4ed8" textAnchor="end">8.5%</text>
+                <text x="184" y="354" fontSize="15" fontWeight="700" fill="#1d4ed8" textAnchor="end">8.75%</text>
                 <text x="56" y="376" fontSize="13" fill="#64748b" textAnchor="start">Tenure</text>
                 <text x="184" y="376" fontSize="15" fontWeight="700" fill="#1d4ed8" textAnchor="end">36 mo</text>
 

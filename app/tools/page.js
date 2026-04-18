@@ -8,6 +8,8 @@ export default function Tools() {
   const [emiErrors, setEmiErrors] = useState({})
   const [eligibilityData, setEligibilityData] = useState({ income: '', emis: '', type: 'salaried', result: null })
   const [eligibilityErrors, setEligibilityErrors] = useState({})
+  const [amountData, setAmountData] = useState({ emi: '', rate: '', tenure: '', result: null })
+  const [amountErrors, setAmountErrors] = useState({})
 
   // EMI Calculator Validation
   const validateEmiField = (name, value) => {
@@ -164,10 +166,14 @@ export default function Tools() {
 
     const income = parseFloat(eligibilityData.income)
     const emis = parseFloat(eligibilityData.emis)
-    const disposable = income - emis
-    const eligible = disposable * 0.5 * 60
-    const score = eligibilityData.type === 'salaried' ? 80 : 70
-    setEligibilityData({ ...eligibilityData, result: { range: `₹${(eligible * 0.8).toFixed(0)} - ₹${eligible.toFixed(0)}`, score } })
+    if (emis > income * 0.5) {
+      setEligibilityData({ ...eligibilityData, result: { eligible: false, message: "Not Eligible - Existing EMIs exceed 50% of income" } })
+    } else {
+      const disposable = income - emis
+      const eligible = disposable * 0.5 * 60
+      const score = eligibilityData.type === 'salaried' ? 80 : 70
+      setEligibilityData({ ...eligibilityData, result: { range: `₹${(eligible * 0.8).toFixed(0)} - ₹${eligible.toFixed(0)}`, score } })
+    }
   }
 
   return (
@@ -312,21 +318,29 @@ export default function Tools() {
               </form>
 
               {eligibilityData.result && (
-                <div style={{ marginTop: '30px', padding: '20px', backgroundColor: '#f5f7fa', borderRadius: '8px', borderLeft: '4px solid #00d084' }}>
+                <div style={{ marginTop: '30px', padding: '20px', backgroundColor: '#f5f7fa', borderRadius: '8px', borderLeft: `4px solid ${eligibilityData.result.eligible === false ? '#ef4444' : '#00d084'}` }}>
                   <h3 style={{ color: '#2563eb', marginBottom: '20px' }}>Your Eligibility Results</h3>
-                  <div>
-                    <p style={{ color: '#64748b', marginBottom: '5px' }}>Eligible Loan Amount Range</p>
-                    <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2563eb', marginBottom: '20px' }}>{eligibilityData.result.range}</p>
-                  </div>
-                  <div style={{ paddingTop: '15px', borderTop: '1px solid #e0e4e8', marginTop: '15px' }}>
-                    <p style={{ color: '#64748b', marginBottom: '5px' }}>Approval Score</p>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#00d084' }}>{eligibilityData.result.score}%</p>
-                      <div style={{ flex: 1, backgroundColor: '#e0e4e8', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
-                        <div style={{ width: `${eligibilityData.result.score}%`, backgroundColor: '#00d084', height: '100%' }}></div>
-                      </div>
+                  {eligibilityData.result.eligible === false ? (
+                    <div>
+                      <p style={{ color: '#ef4444', marginBottom: '5px', fontSize: '1.2rem', fontWeight: 'bold' }}>❌ {eligibilityData.result.message}</p>
                     </div>
-                  </div>
+                  ) : (
+                    <>
+                      <div>
+                        <p style={{ color: '#64748b', marginBottom: '5px' }}>Eligible Loan Amount Range</p>
+                        <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2563eb', marginBottom: '20px' }}>{eligibilityData.result.range}</p>
+                      </div>
+                      <div style={{ paddingTop: '15px', borderTop: '1px solid #e0e4e8', marginTop: '15px' }}>
+                        <p style={{ color: '#64748b', marginBottom: '5px' }}>Approval Score</p>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#00d084' }}>{eligibilityData.result.score}%</p>
+                          <div style={{ flex: 1, backgroundColor: '#e0e4e8', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
+                            <div style={{ width: `${eligibilityData.result.score}%`, backgroundColor: '#00d084', height: '100%' }}></div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
             </div>
