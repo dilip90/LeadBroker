@@ -12,7 +12,7 @@ export default function Header() {
         <div className="container-full">
           <div className="nav-wrapper">
             <Link href="/" className="logo-link">
-              <svg width="180" height="60" viewBox="0 0 240 70" xmlns="http://www.w3.org/2000/svg" style={{ display: 'flex', alignItems: 'center' }}>
+              <svg className="header-logo" viewBox="0 0 240 70" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="lbTheme" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="#2563eb"/>
@@ -55,11 +55,11 @@ export default function Header() {
             </button>
 
             <ul className={`nav-menu ${isOpen ? 'active' : ''}`}>
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/tools">Loan Tools</Link></li>
-              <li><Link href="/guidance">Loan Guidance</Link></li>
-              <li><Link href="/about">About</Link></li>
-              <li><Link href="/contact" className="nav-cta">Get Started</Link></li>
+              <li><Link href="/" onClick={() => setIsOpen(false)}>Home</Link></li>
+              <li><Link href="/tools" onClick={() => setIsOpen(false)}>Loan Tools</Link></li>
+              <li><Link href="/guidance" onClick={() => setIsOpen(false)}>Loan Guidance</Link></li>
+              <li><Link href="/about" onClick={() => setIsOpen(false)}>About</Link></li>
+              <li><Link href="/contact" className="nav-cta" onClick={() => setIsOpen(false)}>Get Started</Link></li>
             </ul>
           </div>
         </div>

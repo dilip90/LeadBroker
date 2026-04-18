@@ -116,11 +116,10 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="hero" style={{
-        minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
         background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-        padding: '80px 0',
+        padding: '120px 0 80px',
         fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif'
       }}>
         <div className="container" style={{
@@ -130,8 +129,7 @@ export default function Home() {
         }}>
           <div className="hero-grid" style={{
             display: 'grid',
-            gridTemplateColumns: '58% 42%',
-            gap: '72px',
+            gap: '3rem',
             alignItems: 'center',
             position: 'relative',
             zIndex: '1'
@@ -305,13 +303,12 @@ export default function Home() {
             {/* Right Column - Illustration */}
             <div className="hero-illustration" style={{
               position: 'relative',
-              minHeight: '560px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               width: '100%'
             }}>
-              <div style={{
+              <div className="hero-bg-circle" style={{
                 position: 'absolute',
                 inset: '0',
                 margin: 'auto',
