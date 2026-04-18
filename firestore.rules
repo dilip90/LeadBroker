@@ -1,0 +1,30 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /leads/{leadId} {
+      allow create: if
+        request.resource.data.keys().hasAll([
+          'fullName',
+          'phoneNumber',
+          'city',
+          'loanType',
+          'loanAmount',
+          'employmentType',
+          'createdAt',
+          'status',
+          'source'
+        ]) &&
+        request.resource.data.fullName is string &&
+        request.resource.data.phoneNumber is string &&
+        request.resource.data.city is string &&
+        request.resource.data.loanType is string &&
+        request.resource.data.loanAmount is string &&
+        request.resource.data.employmentType is string &&
+        request.resource.data.status == 'new' &&
+        request.resource.data.source == 'website';
+
+      allow read, update, delete: if false;
+    }
+  }
+}
