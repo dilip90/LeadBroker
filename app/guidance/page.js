@@ -2,14 +2,38 @@
 
 import { useState } from 'react'
 
+const ChevronIcon = () => (
+  <svg className="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="6 9 12 15 18 9"/>
+  </svg>
+)
+
 export default function Guidance() {
-  const [expandedGuide, setExpandedGuide] = useState(null)
+  const [openGuides, setOpenGuides] = useState(new Set())
   const [expandedFaq, setExpandedFaq] = useState(null)
+
+  const toggleGuide = (idx) => {
+    setOpenGuides(prev => {
+      const next = new Set(prev)
+      if (next.has(idx)) next.delete(idx)
+      else next.add(idx)
+      return next
+    })
+  }
+
+  const toggleFaq = (idx) => {
+    setExpandedFaq(prev => prev === idx ? null : idx)
+  }
 
   const guides = [
     {
       title: 'Personal Loan Guide',
-      icon: '💳',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+          <line x1="1" y1="10" x2="23" y2="10"/>
+        </svg>
+      ),
       summary: 'Learn everything about personal loans, their benefits, eligibility criteria, and how to choose the right loan for your needs.',
       details: [
         'Advantages of personal loans - flexible usage, quick approval, no collateral required',
@@ -22,7 +46,12 @@ export default function Guidance() {
     },
     {
       title: 'Home Loan Guide',
-      icon: '🏠',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      ),
       summary: 'Comprehensive guide to home loans, down payments, loan tenure options, and tips for getting the best rates.',
       details: [
         'Home loans vs. other options: Lowest interest rates, longest repayment period, significant tax benefits',
@@ -36,7 +65,12 @@ export default function Guidance() {
     },
     {
       title: 'Business Loan Guide',
-      icon: '💼',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+        </svg>
+      ),
       summary: 'Guide for business and startup loans, eligibility criteria, required documents, and growth strategies.',
       details: [
         'Types of business loans: Working capital loans, term loans, overdraft facilities, equipment financing',
@@ -50,7 +84,13 @@ export default function Guidance() {
     },
     {
       title: 'EMI Management & Planning',
-      icon: '📊',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"/>
+          <line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="14"/>
+        </svg>
+      ),
       summary: 'Master your EMI payments with smart strategies to reduce interest burden and manage multiple loans.',
       details: [
         'How EMI is calculated: Principal + Interest component decreases and increases respectively over time',
@@ -122,215 +162,128 @@ export default function Guidance() {
     <main>
       <section className="section">
         <div className="container">
-          <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>📚 Loan Guidance & Learning Center</h1>
-          <p style={{ textAlign: 'center', fontSize: '1.1rem', marginBottom: '3rem', color: '#64748b' }}>Expert advice and guides to help you make informed decisions about your loans</p>
+          {/* Page header */}
+          <div className="section-header">
+            <div className="section-eyebrow">Learning Center</div>
+            <h1 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', marginBottom: '0.75rem' }}>Loan Guidance</h1>
+            <p>Expert advice and guides to help you make informed decisions about your loans</p>
+          </div>
 
-          {/* Loan Guides Section */}
-          <h2 style={{ marginTop: '4rem', marginBottom: '2rem', color: '#0f172a', fontSize: '1.8rem' }}>💡 Comprehensive Loan Guides</h2>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '24px',
-            marginBottom: '3rem'
-          }}>
-            {guides.map((guide, idx) => (
-              <div
-                key={idx}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  padding: '24px',
-                  backgroundColor: '#ffffff',
-                  borderRadius: '12px',
-                  border: '1px solid #e0e4e8',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
-                  transition: 'all 0.3s ease',
-                  cursor: 'pointer',
-                  minHeight: '100%'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 8px 16px rgba(37, 99, 235, 0.15)'
-                  e.currentTarget.style.transform = 'translateY(-4px)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)'
-                  e.currentTarget.style.transform = 'translateY(0)'
-                }}
-              >
-                <div style={{ flex: '0 0 auto' }}>
-                  <h3 style={{ fontSize: '1.5rem', marginBottom: '12px', color: '#2563eb' }}>
-                    {guide.icon} {guide.title}
-                  </h3>
-                  <p style={{ color: '#64748b', marginBottom: '16px', lineHeight: '1.6' }}>
+          {/* Guides */}
+          <div style={{ marginBottom: '4rem' }}>
+            <div className="section-eyebrow" style={{ marginBottom: 20 }}>Comprehensive Guides</div>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: 20,
+              alignItems: 'start',
+            }}>
+              {guides.map((guide, idx) => (
+                <div key={idx} className="card card-elevated" style={{ padding: 24 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
+                    <div className="feature-icon" style={{ margin: 0, width: 40, height: 40 }}>
+                      {guide.icon}
+                    </div>
+                    <h3 style={{ margin: 0, fontSize: '1.05rem', color: 'var(--text)' }}>{guide.title}</h3>
+                  </div>
+
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', marginBottom: 16, lineHeight: 1.65 }}>
                     {guide.summary}
                   </p>
+
+                  {openGuides.has(idx) && (
+                    <div style={{
+                      marginBottom: 16,
+                      paddingTop: 14,
+                      borderTop: '1px solid var(--border)',
+                      animation: 'slideDown 0.2s ease both',
+                    }}>
+                      <p style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: 10, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                        Key Topics
+                      </p>
+                      <ul style={{ paddingLeft: 16, margin: 0 }}>
+                        {guide.details.map((detail, didx) => (
+                          <li key={didx} style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: 1.7, marginBottom: 6 }}>{detail}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <button
+                    className={`btn ${openGuides.has(idx) ? 'btn-secondary' : 'btn-primary'}`}
+                    onClick={() => toggleGuide(idx)}
+                    style={{ width: '100%', justifyContent: 'center', marginTop: 'auto' }}
+                  >
+                    {openGuides.has(idx) ? 'Show Less' : 'Read More'}
+                  </button>
                 </div>
+              ))}
+            </div>
+          </div>
 
-                {expandedGuide === idx && (
-                  <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #e0e4e8' }}>
-                    <p style={{ color: '#0f172a', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '12px' }}>
-                      <strong>Key Topics:</strong>
-                    </p>
-                    <ul style={{ color: '#64748b', fontSize: '0.9rem', lineHeight: '1.8', paddingLeft: '20px', marginBottom: '16px' }}>
-                      {guide.details.map((detail, didx) => (
-                        <li key={didx} style={{ marginBottom: '8px' }}>{detail}</li>
-                      ))}
-                    </ul>
+          {/* Expert Tips */}
+          <div style={{ marginBottom: '4rem' }}>
+            <div className="section-eyebrow" style={{ marginBottom: 20 }}>Expert Tips</div>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gap: 16,
+            }}>
+              {tips.map((tip, idx) => (
+                <div key={idx} className="benefit-item" style={{ flexDirection: 'column', gap: 10, padding: '22px 20px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <div className="benefit-icon" style={{ width: 36, height: 36, minWidth: 36 }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                      </svg>
+                    </div>
+                    <h4 style={{ margin: 0, fontSize: '0.95rem', color: 'var(--text)' }}>{tip.title}</h4>
                   </div>
-                )}
-
-                <button
-                  onClick={() => setExpandedGuide(expandedGuide === idx ? null : idx)}
-                  style={{
-                    marginTop: 'auto',
-                    padding: '12px 24px',
-                    backgroundColor: '#2563eb',
-                    color: '#ffffff',
-                    border: 'none',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    fontSize: '1rem',
-                    fontWeight: '600',
-                    transition: 'all 0.3s ease',
-                    width: '100%'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = '#1d4ed8'
-                    e.target.style.transform = 'scale(1.02)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = '#2563eb'
-                    e.target.style.transform = 'scale(1)'
-                  }}
-                >
-                  {expandedGuide === idx ? 'Show Less' : 'Read More'}
-                </button>
-              </div>
-            ))}
+                  <p style={{ margin: 0, fontSize: '0.86rem', color: 'var(--text-muted)', lineHeight: 1.65 }}>{tip.content}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Expert Tips Section */}
-          <h2 style={{ marginTop: '4rem', marginBottom: '2rem', color: '#0f172a', fontSize: '1.8rem' }}>💭 Expert Tips & Best Practices</h2>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: '20px',
-            marginBottom: '3rem'
-          }}>
-            {tips.map((tip, idx) => (
-              <div
-                key={idx}
-                style={{
-                  padding: '24px',
-                  backgroundColor: '#f0f4ff',
-                  borderRadius: '12px',
-                  borderLeft: '4px solid #2563eb'
-                }}
-              >
-                <h4 style={{ color: '#2563eb', marginBottom: '12px', fontSize: '1.1rem' }}>{tip.title}</h4>
-                <p style={{ color: '#64748b', marginBottom: 0, fontSize: '0.95rem', lineHeight: '1.6' }}>{tip.content}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Expanded FAQs Section */}
-          <h2 style={{ marginTop: '4rem', marginBottom: '2rem', color: '#0f172a', fontSize: '1.8rem' }}>❓ Frequently Asked Questions</h2>
-          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          {/* FAQs */}
+          <div style={{ maxWidth: 800, margin: '0 auto 3.5rem' }}>
+            <div className="section-eyebrow" style={{ marginBottom: 20 }}>FAQs</div>
             {faqs.map((faq, idx) => (
-              <div
-                key={idx}
-                style={{
-                  marginBottom: '16px',
-                  borderRadius: '8px',
-                  overflow: 'hidden',
-                  border: '1px solid #e0e4e8',
-                  backgroundColor: '#ffffff'
-                }}
-              >
+              <div key={idx} className={`faq-item${expandedFaq === idx ? ' open' : ''}`}>
                 <button
-                  onClick={() => setExpandedFaq(expandedFaq === idx ? null : idx)}
-                  style={{
-                    width: '100%',
-                    padding: '20px',
-                    textAlign: 'left',
-                    backgroundColor: expandedFaq === idx ? '#f0f4ff' : '#ffffff',
-                    border: 'none',
-                    borderBottom: expandedFaq === idx ? '1px solid #e0e4e8' : 'none',
-                    cursor: 'pointer',
-                    fontSize: '1rem',
-                    fontWeight: '600',
-                    color: '#2563eb',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    transition: 'backgroundColor 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#f0f4ff'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = expandedFaq === idx ? '#f0f4ff' : '#ffffff'
-                  }}
+                  className="faq-btn"
+                  onClick={() => toggleFaq(idx)}
+                  aria-expanded={expandedFaq === idx}
                 >
                   <span>{faq.q}</span>
-                  <span style={{ fontSize: '1.2rem', marginLeft: '10px' }}>
-                    {expandedFaq === idx ? '−' : '+'}
-                  </span>
+                  <ChevronIcon />
                 </button>
-
                 {expandedFaq === idx && (
-                  <div style={{
-                    padding: '20px',
-                    backgroundColor: '#ffffff',
-                    borderLeft: '4px solid #00d084',
-                    color: '#64748b',
-                    lineHeight: '1.8'
-                  }}>
-                    {faq.a}
-                  </div>
+                  <div className="faq-answer">{faq.a}</div>
                 )}
               </div>
             ))}
           </div>
 
-          {/* Call to Action */}
+          {/* CTA */}
           <div style={{
-            marginTop: '4rem',
-            padding: '40px',
-            backgroundColor: '#f0f4ff',
-            borderRadius: '12px',
+            padding: '40px 36px',
+            background: 'var(--primary-subtle)',
+            border: '1px solid var(--primary-muted)',
+            borderRadius: 'var(--r-xl)',
             textAlign: 'center',
-            borderLeft: '4px solid #2563eb'
           }}>
-            <h3 style={{ color: '#2563eb', marginBottom: '16px', fontSize: '1.5rem' }}>Ready to explore loan options?</h3>
-            <p style={{ color: '#64748b', marginBottom: '24px', fontSize: '1.1rem' }}>
+            <h3 style={{ color: 'var(--primary)', marginBottom: 10, fontSize: '1.35rem' }}>Ready to explore loan options?</h3>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: 24, fontSize: '0.95rem' }}>
               Use our tools to calculate EMI and check your eligibility with trusted lenders
             </p>
-            <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href="/tools" className="btn btn-primary" style={{
-                padding: '12px 32px',
-                backgroundColor: '#2563eb',
-                color: '#ffffff',
-                textDecoration: 'none',
-                borderRadius: '8px',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '1rem',
-                fontWeight: '600'
-              }}>
+            <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href="/tools" className="btn btn-primary">
                 Go to Tools
               </a>
-              <a href="/contact" className="btn btn-primary" style={{
-                padding: '12px 32px',
-                backgroundColor: '#00d084',
-                color: '#ffffff',
-                textDecoration: 'none',
-                borderRadius: '8px',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '1rem',
-                fontWeight: '600'
-              }}>
+              <a href="/contact" className="btn btn-secondary">
                 Get Loan Offers
               </a>
             </div>

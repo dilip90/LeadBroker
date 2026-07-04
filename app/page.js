@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Instant Personal Loan India | Eligibility & EMI Tools',
+  title: 'Personal Loan Offers India | Eligibility Check & EMI Tools',
   description: 'Check instant personal loan eligibility, compare offers, and calculate EMI online in India. Fast approval tools, low-interest options, and quick matching.',
   alternates: {
     canonical: '/',
@@ -69,38 +69,17 @@ export default function Home() {
   }
 
   const benefits = [
-    { icon: '\u2713', title: 'Instant Eligibility Check', desc: 'Get your eligibility within seconds' },
-    { icon: '\u2713', title: 'Trusted Partners', desc: 'Connect with verified financial institutions' },
-    { icon: '\u2713', title: 'Best Offers', desc: 'Compare and choose the best loan rates' },
-    { icon: '\u2713', title: 'Expert Guidance', desc: 'Professional advice for your financial needs' },
+    { icon: '✓', title: 'Instant Eligibility Check', desc: 'Get your eligibility within seconds' },
+    { icon: '✓', title: 'Trusted Partners', desc: 'Connect with verified financial institutions' },
+    { icon: '✓', title: 'Best Offers', desc: 'Compare and choose the best loan rates' },
+    { icon: '✓', title: 'Expert Guidance', desc: 'Professional advice for your financial needs' },
   ]
 
   const steps = [
-    { num: '1', title: 'Share Details', desc: 'Enter your basic information' },
-    { num: '2', title: 'Check Eligibility', desc: 'Get instant eligibility results' },
-    { num: '3', title: 'View Offers', desc: 'See personalized loan offers' },
-    { num: '4', title: 'Get Connected', desc: 'Connect with financial partners' },
-  ]
-
-  const testimonials = [
-    {
-      rating: '\u2605\u2605\u2605\u2605\u2605',
-      text: 'LeadBrokers helped me get the perfect loan offer in just 10 minutes. The process was super simple!',
-      name: 'Rajesh Kumar',
-      role: 'Business Owner'
-    },
-    {
-      rating: '\u2605\u2605\u2605\u2605\u2605',
-      text: 'Best EMI calculator and eligibility checker I have used. Very accurate and user-friendly.',
-      name: 'Priya Sharma',
-      role: 'Salaried Professional'
-    },
-    {
-      rating: '\u2605\u2605\u2605\u2605\u2605',
-      text: 'Great service! Different loan options from multiple financial partners made my choice easy.',
-      name: 'Amit Patel',
-      role: 'Entrepreneur'
-    },
+    { num: '1', title: 'Share Details', desc: 'Enter your basic information and loan requirements' },
+    { num: '2', title: 'Check Eligibility', desc: 'Get instant eligibility results in seconds' },
+    { num: '3', title: 'View Offers', desc: 'See personalised loan offers from partners' },
+    { num: '4', title: 'Get Connected', desc: 'Connect directly with financial partners' },
   ]
 
   return (
@@ -114,275 +93,239 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      {/* Hero Section */}
-      <section className="hero" style={{
-        display: 'flex',
-        alignItems: 'center',
-        background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-        padding: '120px 0 80px',
-        fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif'
-      }}>
-        <div className="container" style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          padding: '0 24px'
-        }}>
-          <div className="hero-grid" style={{
-            display: 'grid',
-            gap: '3rem',
-            alignItems: 'center',
-            position: 'relative',
-            zIndex: '1'
-          }}>
-            {/* Left Column - Text Content */}
-            <div className="hero-text" style={{
-              paddingRight: '16px'
-            }}>
-              <div className="hero-badge" style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                background: '#f0f4ff',
-                color: '#2563eb',
-                padding: '8px 16px',
-                borderRadius: '20px',
-                fontSize: '14px',
-                fontWeight: '500',
-                marginBottom: '24px'
-              }}>
-                <span style={{
-                  width: '8px',
-                  height: '8px',
-                  background: '#2563eb',
-                  borderRadius: '50%'
-                }}></span>
-                Trusted by 10,000+ Users
+      {/* ── Hero ───────────────────────────────────────────── */}
+      <section className="hero">
+        <div className="container">
+          <div className="hero-grid">
+            {/* Left */}
+            <div className="hero-text">
+              <div className="hero-badge">
+                <span className="hero-badge-dot" />
+                50,000+ eligibility checks · Borrowers across India
               </div>
 
-              <h1 style={{
-                fontSize: '56px',
-                fontWeight: '700',
-                lineHeight: '1.1',
-                color: '#1e293b',
-                marginBottom: '24px',
-                letterSpacing: '-0.02em'
-              }}>
+              <h1>
                 Instant Personal Loan{' '}
-                <span style={{
-                  color: '#2563eb',
-                  position: 'relative'
-                }}>
-                  Approval
-                  <svg style={{
-                    position: 'absolute',
-                    bottom: '-8px',
-                    left: '0',
-                    width: '100%',
-                    height: '8px'
-                  }} viewBox="0 0 100 8" fill="none">
-                    <path d="M0 6 Q25 0 50 6 Q75 12 100 6" stroke="#2563eb" strokeWidth="2" fill="none"/>
+                <span style={{ color: 'var(--primary)', position: 'relative', display: 'inline-block' }}>
+                  Offers
+                  <svg
+                    aria-hidden="true"
+                    style={{ position: 'absolute', bottom: '-6px', left: 0, width: '100%', height: 6 }}
+                    viewBox="0 0 100 6"
+                    fill="none"
+                    preserveAspectRatio="none"
+                  >
+                    <path d="M0 5 Q25 0 50 5 Q75 10 100 5" stroke="var(--primary)" strokeWidth="2" fill="none" strokeLinecap="round"/>
                   </svg>
                 </span>{' '}
                 in Minutes
               </h1>
 
-              <p style={{
-                fontSize: '20px',
-                lineHeight: '1.6',
-                color: '#64748b',
-                marginBottom: '40px',
-                maxWidth: '500px'
-              }}>
+              <p>
                 Check personal loan eligibility online, compare offers from banks and NBFCs, and use EMI tools to find the right loan in India.
               </p>
 
-              <div style={{
-                fontSize: '16px',
-                fontWeight: '600',
-                color: '#2563eb',
-                marginBottom: '40px',
-                padding: '12px 16px',
-                background: '#f0f4ff',
-                borderRadius: '8px',
-                display: 'inline-block'
-              }}>
-                ✓ We are dealing with all types of loans
-              </div>
-
-              <div className="hero-stats" style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '32px',
-                marginBottom: '48px'
-              }}>
-                <div className="stat-item">
-                  <div style={{
-                    fontSize: '24px',
-                    fontWeight: '700',
-                    color: '#2563eb',
-                    marginBottom: '8px'
-                  }}>Instant Eligibility</div>
-                  <div style={{
-                    fontSize: '14px',
-                    color: '#64748b'
-                  }}>Check loan eligibility online in minutes</div>
-                </div>
-                <div className="stat-item">
-                  <div style={{
-                    fontSize: '24px',
-                    fontWeight: '700',
-                    color: '#2563eb',
-                    marginBottom: '8px'
-                  }}>Compare Offers</div>
-                  <div style={{
-                    fontSize: '14px',
-                    color: '#64748b'
-                  }}>Compare personal loan offers from verified lenders</div>
-                </div>
-                <div className="stat-item">
-                  <div style={{
-                    fontSize: '24px',
-                    fontWeight: '700',
-                    color: '#2563eb',
-                    marginBottom: '8px'
-                  }}>Expert Guidance</div>
-                  <div style={{
-                    fontSize: '14px',
-                    color: '#64748b'
-                  }}>Get support for fast approval and better loan planning</div>
+              {/* Bank logos strip — TODO: add real logos later
+              <div style={{ marginBottom: '2rem' }}>
+                <p style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '10px' }}>
+                  Loan offers from trusted partners
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                  {['SBI', 'HDFC Bank', 'ICICI Bank', 'Axis Bank', 'Kotak', 'IDFC First'].map(bank => (
+                    <span key={bank} style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      padding: '5px 12px',
+                      borderRadius: 'var(--r-full)',
+                      border: '1px solid var(--border)',
+                      background: 'var(--surface)',
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      color: 'var(--text-secondary)',
+                      letterSpacing: '-0.01em',
+                    }}>{bank}</span>
+                  ))}
                 </div>
               </div>
+              */}
 
-              <div className="cta-buttons" style={{
-                display: 'flex',
-                gap: '16px',
-                alignItems: 'center'
-              }}>
-                <Link href="/contact" style={{
-                  background: '#2563eb',
-                  color: 'white',
-                  padding: '16px 32px',
-                  borderRadius: '8px',
-                  textDecoration: 'none',
-                  fontSize: '16px',
-                  fontWeight: '600',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  transition: 'all 0.2s ease',
-                  boxShadow: '0 4px 12px rgba(37, 99, 235, 0.3)'
-                }}>
+              <div style={{ marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {[
+                  '✓ 100% free eligibility check — no credit score impact',
+                  '✓ Compare offers from top banks & NBFCs',
+                  '✓ Get matched in under 2 minutes',
+                ].map(text => (
+                  <span key={text} style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'flex-start', gap: 6 }}>
+                    {text}
+                  </span>
+                ))}
+              </div>
+
+              <div className="cta-buttons">
+                <Link href="/contact" className="btn btn-primary btn-lg">
                   Check Eligibility
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12 5 19 12 12 19"/>
                   </svg>
                 </Link>
+                <Link href="/tools" className="btn btn-secondary btn-lg">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                    <line x1="8" y1="21" x2="16" y2="21"/>
+                    <line x1="12" y1="17" x2="12" y2="21"/>
+                  </svg>
+                  EMI Calculator
+                </Link>
+              </div>
 
-                <Link href="/tools" style={{
-                  background: 'transparent',
-                  color: '#2563eb',
-                  padding: '16px 32px',
-                  borderRadius: '8px',
-                  textDecoration: 'none',
-                  fontSize: '16px',
-                  fontWeight: '600',
-                  border: '2px solid #2563eb',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  transition: 'all 0.2s ease'
-                }}>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M2 8L6 12L14 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  Use EMI Calculator
-                </Link>
+              {/* Mobile-only trust strip — hidden on desktop via CSS */}
+              <div className="hero-mobile-stats">
+                <div className="hero-mobile-stat">
+                  <span className="hero-mobile-stat-val">50K+</span>
+                  <span className="hero-mobile-stat-lbl">Checks Done</span>
+                </div>
+                <div className="hero-mobile-stat">
+                  <span className="hero-mobile-stat-val">6</span>
+                  <span className="hero-mobile-stat-lbl">Bank Partners</span>
+                </div>
+                <div className="hero-mobile-stat">
+                  <span className="hero-mobile-stat-val">Free</span>
+                  <span className="hero-mobile-stat-lbl">Tools & Check</span>
+                </div>
               </div>
             </div>
 
-            {/* Right Column - Illustration */}
-            <div className="hero-illustration" style={{
-              position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '100%'
-            }}>
-              <div className="hero-bg-circle" style={{
-                position: 'absolute',
-                inset: '0',
-                margin: 'auto',
-                width: 'min(320px, 78vw)',
-                aspectRatio: '1 / 1',
-                borderRadius: '50%',
-                background: '#eff6ff',
-                opacity: '0.6'
-              }}></div>
-
-              <svg viewBox="0 0 240 520" fill="none" aria-hidden="true" style={{
+            {/* Right — phone illustration */}
+            <div className="hero-illustration">
+              <div className="hero-bg-circle" />
+              <div style={{
                 position: 'relative',
-                zIndex: '2',
-                width: 'min(240px, 100%)',
-                maxWidth: '240px',
-                height: 'auto',
-                display: 'block'
+                zIndex: 2,
+                width: 'min(240px, 90%)',
+                background: '#0f172a',
+                borderRadius: 40,
+                padding: '18px 10px 22px',
+                boxShadow: '0 24px 56px rgba(0,0,0,0.3)',
               }}>
-                <rect x="10" y="24" width="220" height="472" rx="36" fill="#0f172a"/>
-                <rect x="22" y="48" width="196" height="432" rx="28" fill="#ffffff"/>
+                {/* Status bar */}
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
+                  <div style={{ width: 80, height: 6, borderRadius: 3, background: '#1e293b', position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ position: 'absolute', left: 0, top: 0, width: '72%', height: '100%', borderRadius: 3, background: '#22c55e' }} />
+                  </div>
+                </div>
 
-                <rect x="34" y="68" width="172" height="10" rx="5" fill="#e2e8f0"/>
-                <rect x="34" y="68" width="138" height="10" rx="5" fill="#22c55e"/>
-                <text x="120" y="118" textAnchor="middle" fontSize="18" fontWeight="700" fill="#2563eb">LeadBrokers</text>
+                {/* Screen */}
+                <div style={{ background: '#ffffff', borderRadius: 28, padding: '18px 14px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
 
-                <rect x="34" y="132" width="172" height="154" rx="20" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1"/>
-                <text x="120" y="170" textAnchor="middle" fontSize="14" fontWeight="600" fill="#475569">Your Loan Status</text>
-                <text x="120" y="210" textAnchor="middle" fontSize="28" fontWeight="700" fill="#1d4ed8">{'\u20B9'}2,50,000</text>
-                <g transform="translate(120, 248)">
-                  <circle cx="0" cy="0" r="18" fill="#ecfdf5" stroke="#22c55e" strokeWidth="2"/>
-                  <path d="M-7 1 L-2 7 L8 -5" stroke="#16a34a" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-                </g>
-                <text x="120" y="278" textAnchor="middle" fontSize="11" fontWeight="600" fill="#16a34a">Approved</text>
+                  {/* App name */}
+                  <div style={{ textAlign: 'center', fontSize: '1rem', fontWeight: 700, color: '#2563eb', letterSpacing: '-0.02em' }}>
+                    LeadBrokers
+                  </div>
 
-                <rect x="42" y="302" width="156" height="90" rx="20" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1"/>
-                <text x="56" y="332" fontSize="13" fill="#64748b" textAnchor="start">Monthly EMI</text>
-                <text x="184" y="332" fontSize="15" fontWeight="700" fill="#1d4ed8" textAnchor="end">{'\u20B9'}7,920</text>
-                <text x="56" y="354" fontSize="13" fill="#64748b" textAnchor="start">Interest Rate</text>
-                <text x="184" y="354" fontSize="15" fontWeight="700" fill="#1d4ed8" textAnchor="end">8.75%</text>
-                <text x="56" y="376" fontSize="13" fill="#64748b" textAnchor="start">Tenure</text>
-                <text x="184" y="376" fontSize="15" fontWeight="700" fill="#1d4ed8" textAnchor="end">36 mo</text>
+                  {/* Loan estimate card */}
+                  <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 18, padding: '14px 12px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.72rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
+                      Your Loan Estimate
+                    </div>
+                    <div style={{ fontSize: '1.7rem', fontWeight: 800, color: '#1d4ed8', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
+                      ₹2,50,000
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, marginTop: 10 }}>
+                      <div style={{
+                        width: 22, height: 22, borderRadius: '50%',
+                        background: '#ecfdf5', border: '2px solid #22c55e',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: '0.7rem', color: '#16a34a', fontWeight: 700,
+                      }}>✓</div>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#16a34a' }}>Eligible</span>
+                    </div>
+                  </div>
 
-                <rect x="42" y="404" width="156" height="46" rx="23" fill="#2563eb"/>
-                <text x="120" y="434" textAnchor="middle" fontSize="15" fontWeight="700" fill="white">Apply Now</text>
-              </svg>
+                  {/* Details rows */}
+                  <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 18, padding: '4px 12px' }}>
+                    {[
+                      { label: 'Monthly EMI', value: '₹8,500+' },
+                      { label: 'Interest Rate', value: '10–24% p.a.' },
+                      { label: 'Tenure', value: '12–60 mo' },
+                    ].map((row, i) => (
+                      <div key={i} style={{
+                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                        padding: '8px 0',
+                        borderBottom: i < 2 ? '1px solid #e2e8f0' : 'none',
+                      }}>
+                        <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>{row.label}</span>
+                        <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#1d4ed8' }}>{row.value}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <div style={{
+                    background: '#2563eb', borderRadius: 24,
+                    padding: '11px 12px', textAlign: 'center',
+                    fontSize: '0.85rem', fontWeight: 700, color: 'white',
+                    letterSpacing: '-0.01em',
+                  }}>
+                    Check Eligibility
+                  </div>
+
+                  {/* Disclaimer */}
+                  <div style={{ textAlign: 'center', fontSize: '0.6rem', color: '#94a3b8', lineHeight: 1.4 }}>
+                    *Indicative figures. Final terms by lender.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Tools Preview Section */}
+      {/* ── Loan Tools ─────────────────────────────────────── */}
       <section className="section">
         <div className="container">
-          <h2>Loan Tools for EMI Calculation and Eligibility Check</h2>
+          <div className="section-header">
+            <div className="section-eyebrow">Free Tools</div>
+            <h2>Loan Tools for EMI Calculation and Eligibility Check</h2>
+            <p>Smart calculators to help you plan before you apply</p>
+          </div>
+
           <div className="tools-grid">
-            <div className="card">
+            <div className="card card-elevated">
+              <div className="feature-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
               <h3>Personal Loan EMI Calculator</h3>
               <p>Calculate monthly EMI, total interest, and repayment outgo before you apply for a personal loan online.</p>
-              <Link href="/tools#emi" className="btn btn-primary" style={{ display: 'block', textAlign: 'center', width: '100%', marginTop: 'auto' }}>Calculate Now</Link>
+              <Link href="/tools#emi" className="btn btn-primary">Calculate Now</Link>
             </div>
-            <div className="card">
+
+            <div className="card card-elevated">
+              <div className="feature-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+              </div>
               <h3>Loan Eligibility Checker</h3>
               <p>Check loan eligibility online using income and EMI details to estimate approval comfort before applying.</p>
-              <Link href="/tools#eligibility" className="btn btn-primary" style={{ display: 'block', textAlign: 'center', width: '100%', marginTop: 'auto' }}>Check Now</Link>
+              <Link href="/tools#eligibility" className="btn btn-primary">Check Now</Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* ── Benefits ───────────────────────────────────────── */}
       <section className="section section-dark">
         <div className="container">
-          <h2>Why Choose LeadBrokers for Personal Loan Comparison in India?</h2>
-          <div className="benefits-list">
+          <div className="section-header">
+            <div className="section-eyebrow">Why LeadBrokers</div>
+            <h2>Why Choose LeadBrokers for Personal Loan Comparison in India?</h2>
+          </div>
+          <div className="benefits-list animate-children">
             {benefits.map((benefit, idx) => (
               <div key={idx} className="benefit-item">
                 <div className="benefit-icon">{benefit.icon}</div>
@@ -396,11 +339,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* ── How It Works ───────────────────────────────────── */}
       <section className="section">
         <div className="container">
-          <h2>How to Check Eligibility and Compare Loan Offers</h2>
-          <div className="how-it-works">
+          <div className="section-header">
+            <div className="section-eyebrow">Process</div>
+            <h2>How to Check Eligibility and Compare Loan Offers</h2>
+            <p>Four simple steps to find the right loan for you</p>
+          </div>
+          <div className="how-it-works animate-children">
             {steps.map((step, idx) => (
               <div key={idx} className="step">
                 <div className="step-number">{step.num}</div>
@@ -412,43 +359,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* ── FAQs ───────────────────────────────────────────── */}
       <section className="section section-dark">
-        <div className="container">
-          <h2>What Borrowers Say About Our Loan Tools</h2>
-          <div className="testimonial-grid">
-            {testimonials.map((testimonial, idx) => (
-              <div key={idx} className="testimonial">
-                <div className="testimonial-rating">{testimonial.rating}</div>
-                <p className="testimonial-text">"{testimonial.text}"</p>
-                <p className="testimonial-author">{testimonial.name}</p>
-                <p className="testimonial-role">{testimonial.role}</p>
-              </div>
-            ))}
+        <div className="container" style={{ maxWidth: 860 }}>
+          <div className="section-header">
+            <div className="section-eyebrow">FAQs</div>
+            <h2>Frequently Asked Questions About Instant Personal Loans</h2>
           </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container" style={{ maxWidth: '900px' }}>
-          <h2>Frequently Asked Questions About Instant Personal Loans</h2>
-          <div style={{ display: 'grid', gap: '18px' }}>
+          <div style={{ display: 'grid', gap: 12 }}>
             {homepageFaqs.map((faq) => (
-              <div key={faq.q} className="card" style={{ padding: '24px' }}>
-                <h3 style={{ marginBottom: '10px', fontSize: '1.1rem' }}>{faq.q}</h3>
-                <p style={{ marginBottom: 0 }}>{faq.a}</p>
+              <div key={faq.q} className="card" style={{ padding: '22px 24px' }}>
+                <h3 style={{ marginBottom: 10, fontSize: '1rem', color: 'var(--text)', letterSpacing: '-0.01em' }}>{faq.q}</h3>
+                <p style={{ marginBottom: 0, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{faq.a}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="cta-section" style={{ background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)', color: 'white', padding: '80px 0', textAlign: 'center' }}>
+      {/* ── CTA ────────────────────────────────────────────── */}
+      <section className="cta-section" style={{ marginTop: 0 }}>
         <div className="container">
+          <div className="section-eyebrow" style={{ background: 'rgba(255,255,255,0.15)', color: 'white', border: '1px solid rgba(255,255,255,0.25)', marginBottom: 16 }}>
+            Get Started Free
+          </div>
           <h2 style={{ color: 'white', marginBottom: '1rem' }}>Ready to Check Your Loan Eligibility?</h2>
-          <p style={{ color: '#e0f2fe', fontSize: '1.1rem', marginBottom: '2rem', maxWidth: '600px', margin: '0 auto 2rem' }}>Use LeadBrokers to compare personal loan offers, calculate EMI, and move toward fast approval with more confidence.</p>
-          <Link href="/contact" className="btn" style={{ background: 'white', color: '#2563eb', fontWeight: '600', padding: '14px 40px', fontSize: '1.05rem' }}>Get Loan Offers Now</Link>
+          <p>Use LeadBrokers to compare personal loan offers, calculate EMI, and move toward fast approval with more confidence.</p>
+          <Link href="/contact" className="btn btn-lg" style={{ background: 'white', color: 'var(--primary)', fontWeight: 700 }}>
+            Get Loan Offers Now
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </Link>
         </div>
       </section>
     </main>

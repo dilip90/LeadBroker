@@ -1,6 +1,13 @@
+import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 export const metadata = {
   metadataBase: new URL('https://leadbrokers.in'),
@@ -45,9 +52,22 @@ export const metadata = {
   },
 }
 
+const themeScript = `
+(function() {
+  try {
+    var stored = localStorage.getItem('lb-theme');
+    var system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', stored || system);
+  } catch(e) {}
+})();
+`
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <Header />
         {children}

@@ -3,6 +3,17 @@
 import Link from 'next/link'
 import { useState } from 'react'
 
+const FieldError = ({ msg }) => msg ? (
+  <p className="form-error">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="8" x2="12" y2="12"/>
+      <line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+    {msg}
+  </p>
+) : null
+
 export default function Tools() {
   const [emiData, setEmiData] = useState({ amount: '', rate: '', tenure: '', result: null })
   const [emiErrors, setEmiErrors] = useState({})
@@ -69,7 +80,6 @@ export default function Tools() {
   const calculateEMI = (e) => {
     e.preventDefault()
 
-    // Validate all fields before calculation
     const newErrors = {}
     if (!emiData.amount) newErrors.amount = 'Loan amount is required'
     else if (parseInt(emiData.amount) < 100000) newErrors.amount = 'Minimum loan amount is ₹1,00,000'
@@ -149,7 +159,6 @@ export default function Tools() {
   const checkEligibility = (e) => {
     e.preventDefault()
 
-    // Validate all fields before checking
     const newErrors = {}
     if (!eligibilityData.income) newErrors.income = 'Monthly income is required'
     else if (parseInt(eligibilityData.income) < 10000) newErrors.income = 'Minimum monthly income should be ₹10,000'
@@ -180,16 +189,34 @@ export default function Tools() {
     <main>
       <section className="section">
         <div className="container">
-          <h1>Loan Tools</h1>
-          <p style={{ textAlign: 'center', fontSize: '1.1rem', marginBottom: '3rem' }}>Use our advanced calculators and checkers to plan your loan better</p>
+          {/* Page header */}
+          <div className="section-header">
+            <div className="section-eyebrow">Free Tools</div>
+            <h1 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', marginBottom: '0.75rem' }}>Loan Tools</h1>
+            <p>Advanced calculators to help you plan smarter before you apply</p>
+          </div>
 
-          {/* EMI Calculator */}
-          <div id="emi" style={{ marginBottom: '4rem' }}>
-            <div className="card" style={{ maxWidth: '600px', margin: '0 auto', padding: '40px' }}>
-              <h2 style={{ marginBottom: '30px', color: '#2563eb' }}>💰 EMI Calculator</h2>
-              <p>Calculate your monthly EMI payments and view the total interest and payment amount</p>
+          {/* ── EMI Calculator ─────────────────────────────── */}
+          <div id="emi" style={{ marginBottom: '3.5rem' }}>
+            <div className="card card-elevated" style={{ maxWidth: 600, margin: '0 auto', padding: '36px 40px' }}>
+              {/* Card header */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 8 }}>
+                <div className="feature-icon" style={{ margin: 0 }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2"/>
+                    <line x1="8" y1="21" x2="16" y2="21"/>
+                    <line x1="12" y1="17" x2="12" y2="21"/>
+                  </svg>
+                </div>
+                <div>
+                  <h2 style={{ margin: 0, fontSize: '1.35rem' }}>EMI Calculator</h2>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Monthly installment breakdown</p>
+                </div>
+              </div>
 
-              <form onSubmit={calculateEMI} style={{ marginTop: '30px' }}>
+              <hr className="divider" />
+
+              <form onSubmit={calculateEMI}>
                 <div className="form-group">
                   <label htmlFor="loan-amount">Loan Amount (₹)</label>
                   <input
@@ -198,11 +225,9 @@ export default function Tools() {
                     value={emiData.amount}
                     onChange={handleEmiChange}
                     placeholder="e.g., 500000"
-                    style={{ borderColor: emiErrors.amount ? '#ef4444' : 'inherit' }}
+                    className={emiErrors.amount ? 'error' : ''}
                   />
-                  {emiErrors.amount && (
-                    <p style={{ color: '#ef4444', marginTop: '4px', fontSize: '0.875rem' }}>✕ {emiErrors.amount}</p>
-                  )}
+                  <FieldError msg={emiErrors.amount} />
                 </div>
 
                 <div className="form-group">
@@ -214,11 +239,9 @@ export default function Tools() {
                     value={emiData.rate}
                     onChange={handleEmiChange}
                     placeholder="e.g., 9.5"
-                    style={{ borderColor: emiErrors.rate ? '#ef4444' : 'inherit' }}
+                    className={emiErrors.rate ? 'error' : ''}
                   />
-                  {emiErrors.rate && (
-                    <p style={{ color: '#ef4444', marginTop: '4px', fontSize: '0.875rem' }}>✕ {emiErrors.rate}</p>
-                  )}
+                  <FieldError msg={emiErrors.rate} />
                 </div>
 
                 <div className="form-group">
@@ -229,45 +252,58 @@ export default function Tools() {
                     value={emiData.tenure}
                     onChange={handleEmiChange}
                     placeholder="e.g., 60"
-                    style={{ borderColor: emiErrors.tenure ? '#ef4444' : 'inherit' }}
+                    className={emiErrors.tenure ? 'error' : ''}
                   />
-                  {emiErrors.tenure && (
-                    <p style={{ color: '#ef4444', marginTop: '4px', fontSize: '0.875rem' }}>✕ {emiErrors.tenure}</p>
-                  )}
+                  <FieldError msg={emiErrors.tenure} />
                 </div>
 
-                <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '20px' }}>Calculate EMI</button>
+                <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: 4 }}>
+                  Calculate EMI
+                </button>
               </form>
 
               {emiData.result && (
-                <div style={{ marginTop: '30px', padding: '20px', backgroundColor: '#f5f7fa', borderRadius: '8px', borderLeft: '4px solid #00d084' }}>
-                  <h3 style={{ color: '#2563eb', marginBottom: '20px' }}>Your EMI Results</h3>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                <div className="result-box success">
+                  <h3 style={{ fontSize: '1rem', marginBottom: 18, color: 'var(--text)' }}>Your EMI Results</h3>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
                     <div>
-                      <p style={{ color: '#64748b', marginBottom: '5px' }}>Monthly EMI</p>
-                      <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2563eb' }}>₹{emiData.result.emi}</p>
+                      <div className="result-label">Monthly EMI</div>
+                      <div className="result-value">₹{emiData.result.emi}</div>
                     </div>
                     <div>
-                      <p style={{ color: '#64748b', marginBottom: '5px' }}>Total Interest</p>
-                      <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#00d084' }}>₹{emiData.result.totalInterest}</p>
+                      <div className="result-label">Total Interest</div>
+                      <div className="result-value" style={{ color: 'var(--accent)' }}>₹{emiData.result.totalInterest}</div>
                     </div>
                   </div>
-                  <div style={{ marginTop: '15px', paddingTop: '15px', borderTop: '1px solid #e0e4e8' }}>
-                    <p style={{ color: '#64748b', marginBottom: '5px' }}>Total Amount to be Paid</p>
-                    <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#0f172a' }}>₹{emiData.result.totalPayment}</p>
+                  <hr className="result-divider" />
+                  <div>
+                    <div className="result-label">Total Amount Payable</div>
+                    <div className="result-value" style={{ color: 'var(--text)' }}>₹{emiData.result.totalPayment}</div>
                   </div>
                 </div>
               )}
             </div>
           </div>
 
-          {/* Eligibility Checker */}
+          {/* ── Eligibility Checker ────────────────────────── */}
           <div id="eligibility">
-            <div className="card" style={{ maxWidth: '600px', margin: '0 auto', padding: '40px' }}>
-              <h2 style={{ marginBottom: '30px', color: '#2563eb' }}>✓ Eligibility Checker</h2>
-              <p>Check your loan eligibility and get your approval score instantly</p>
+            <div className="card card-elevated" style={{ maxWidth: 600, margin: '0 auto', padding: '36px 40px' }}>
+              {/* Card header */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 8 }}>
+                <div className="feature-icon" style={{ margin: 0 }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                  </svg>
+                </div>
+                <div>
+                  <h2 style={{ margin: 0, fontSize: '1.35rem' }}>Eligibility Checker</h2>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Instant approval score estimate</p>
+                </div>
+              </div>
 
-              <form onSubmit={checkEligibility} style={{ marginTop: '30px' }}>
+              <hr className="divider" />
+
+              <form onSubmit={checkEligibility}>
                 <div className="form-group">
                   <label htmlFor="monthly-income">Monthly Income (₹)</label>
                   <input
@@ -276,11 +312,9 @@ export default function Tools() {
                     value={eligibilityData.income}
                     onChange={handleEligibilityChange}
                     placeholder="e.g., 50000"
-                    style={{ borderColor: eligibilityErrors.income ? '#ef4444' : 'inherit' }}
+                    className={eligibilityErrors.income ? 'error' : ''}
                   />
-                  {eligibilityErrors.income && (
-                    <p style={{ color: '#ef4444', marginTop: '4px', fontSize: '0.875rem' }}>✕ {eligibilityErrors.income}</p>
-                  )}
+                  <FieldError msg={eligibilityErrors.income} />
                 </div>
 
                 <div className="form-group">
@@ -291,11 +325,9 @@ export default function Tools() {
                     value={eligibilityData.emis}
                     onChange={handleEligibilityChange}
                     placeholder="e.g., 10000"
-                    style={{ borderColor: eligibilityErrors.emis ? '#ef4444' : 'inherit' }}
+                    className={eligibilityErrors.emis ? 'error' : ''}
                   />
-                  {eligibilityErrors.emis && (
-                    <p style={{ color: '#ef4444', marginTop: '4px', fontSize: '0.875rem' }}>✕ {eligibilityErrors.emis}</p>
-                  )}
+                  <FieldError msg={eligibilityErrors.emis} />
                 </div>
 
                 <div className="form-group">
@@ -304,38 +336,48 @@ export default function Tools() {
                     id="employment-type"
                     value={eligibilityData.type}
                     onChange={handleEligibilityChange}
-                    style={{ borderColor: eligibilityErrors.type ? '#ef4444' : 'inherit' }}
+                    className={eligibilityErrors.type ? 'error' : ''}
                   >
                     <option value="salaried">Salaried</option>
                     <option value="self-employed">Self-Employed</option>
                   </select>
-                  {eligibilityErrors.type && (
-                    <p style={{ color: '#ef4444', marginTop: '4px', fontSize: '0.875rem' }}>✕ {eligibilityErrors.type}</p>
-                  )}
+                  <FieldError msg={eligibilityErrors.type} />
                 </div>
 
-                <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '20px' }}>Check Eligibility</button>
+                <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: 4 }}>
+                  Check Eligibility
+                </button>
               </form>
 
               {eligibilityData.result && (
-                <div style={{ marginTop: '30px', padding: '20px', backgroundColor: '#f5f7fa', borderRadius: '8px', borderLeft: `4px solid ${eligibilityData.result.eligible === false ? '#ef4444' : '#00d084'}` }}>
-                  <h3 style={{ color: '#2563eb', marginBottom: '20px' }}>Your Eligibility Results</h3>
+                <div className={`result-box ${eligibilityData.result.eligible === false ? 'error' : 'success'}`}>
+                  <h3 style={{ fontSize: '1rem', marginBottom: 18, color: 'var(--text)' }}>Your Eligibility Results</h3>
                   {eligibilityData.result.eligible === false ? (
-                    <div>
-                      <p style={{ color: '#ef4444', marginBottom: '5px', fontSize: '1.2rem', fontWeight: 'bold' }}>❌ {eligibilityData.result.message}</p>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--error)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="15" y1="9" x2="9" y2="15"/>
+                        <line x1="9" y1="9" x2="15" y2="15"/>
+                      </svg>
+                      <p style={{ color: 'var(--error)', fontWeight: 600, margin: 0, fontSize: '0.95rem' }}>
+                        {eligibilityData.result.message}
+                      </p>
                     </div>
                   ) : (
                     <>
                       <div>
-                        <p style={{ color: '#64748b', marginBottom: '5px' }}>Eligible Loan Amount Range</p>
-                        <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2563eb', marginBottom: '20px' }}>{eligibilityData.result.range}</p>
+                        <div className="result-label">Eligible Loan Amount Range</div>
+                        <div className="result-value">{eligibilityData.result.range}</div>
                       </div>
-                      <div style={{ paddingTop: '15px', borderTop: '1px solid #e0e4e8', marginTop: '15px' }}>
-                        <p style={{ color: '#64748b', marginBottom: '5px' }}>Approval Score</p>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#00d084' }}>{eligibilityData.result.score}%</p>
-                          <div style={{ flex: 1, backgroundColor: '#e0e4e8', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
-                            <div style={{ width: `${eligibilityData.result.score}%`, backgroundColor: '#00d084', height: '100%' }}></div>
+                      <hr className="result-divider" />
+                      <div>
+                        <div className="result-label" style={{ marginBottom: 10 }}>Approval Score</div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                          <span style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent)', letterSpacing: '-0.02em', minWidth: 56 }}>
+                            {eligibilityData.result.score}%
+                          </span>
+                          <div className="progress-track" style={{ flex: 1 }}>
+                            <div className="progress-fill" style={{ width: `${eligibilityData.result.score}%` }} />
                           </div>
                         </div>
                       </div>
@@ -344,6 +386,14 @@ export default function Tools() {
                 </div>
               )}
             </div>
+          </div>
+
+          {/* CTA */}
+          <div style={{ textAlign: 'center', marginTop: '4rem' }}>
+            <p style={{ marginBottom: 16, color: 'var(--text-muted)' }}>Ready to apply with your estimates?</p>
+            <Link href="/contact" className="btn btn-primary btn-lg">
+              Get Personalised Loan Offers
+            </Link>
           </div>
         </div>
       </section>
